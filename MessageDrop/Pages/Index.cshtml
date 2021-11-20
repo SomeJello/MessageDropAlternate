@@ -1,0 +1,48 @@
+﻿@page
+@model MessageDrop.Pages.IndexModel
+
+@{
+    ViewData["Title"] = "MessageDrop!";
+}
+
+
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
+
+<h1>Message Drop!!</h1>
+<h2>Drop those hot messages!</h2>
+
+<div id="input-area">
+    <form method="post">
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+        <fieldset>
+            <legend>Enter a message to DROP</legend>
+            <textarea asp-for="Message.MessageString" rows="10" cols="150"
+                      placeholder="Enter your message to DROP here"></textarea>
+            <span asp-validation-for="Message.MessageString" class="text-danger"></span>
+        </fieldset>
+        <div class="buttonHolder">
+            <button type="submit" value="Create">DROP IT!</button>
+        </div>
+    </form>
+</div>
+
+<fieldset>
+    <legend>DROPPED messages:</legend>
+    <div id="result-area">
+        <table>
+            <tbody>
+                @foreach (var item in Model.Messages)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.MessageString)
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</fieldset>
